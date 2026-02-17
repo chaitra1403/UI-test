@@ -1,0 +1,344 @@
+{
+  "site_url": "https://github.com/",
+  "site_type": "unknown",
+  "site_category": "general",
+  "test_name": "github_explore_trending_-_complete_user_journey",
+  "login_mechanisms": [
+    "content_browsing",
+    "site_navigation"
+  ],
+  "user_journeys": [
+    {
+      "workflow_type": "navigation_flow",
+      "path": [
+        "trending",
+        "alibaba",
+        "explore"
+      ],
+      "success_rate": "discovered_site_navigation",
+      "scenario_priority": "medium",
+      "description": "General website navigation and content discovery"
+    }
+  ],
+  "proposed_scenarios": [
+    {
+      "scenario_name": "Discovered Workflow: GitHub Explore & Trending - Complete User Journey",
+      "description": "Comprehensive test covering the user journey from Explore page to trending repositories, repository navigation, negative navigation, and search bar interaction.",
+      "workflow_narrative": "A user visits GitHub, explores trending repositories, navigates to a repository, tests negative navigation, and interacts with the search bar, validating both positive and negative UI paths.",
+      "playwright_implementation_guidance": [
+        "Use page.goto for initial navigation steps.",
+        "Use waitForSelector before each click to ensure stability.",
+        "Validate navigation by asserting URL and visible page elements.",
+        "Capture screenshots after negative navigation steps to verify error UI.",
+        "Use all provided selectors for resilience against UI changes."
+      ],
+      "test_type": "e2e_business_workflow",
+      "priority": "critical",
+      "business_goal": "Verify users can explore trending repositories, access repository content, and interact with the search bar without authentication.",
+      "user_story": "As a visitor, I want to browse trending repositories and interact with repository navigation so that I can discover interesting open source projects.",
+      "detailed_steps": [
+        {
+          "step_number": 1,
+          "action": "Navigate to Explore page",
+          "component": "Navigation",
+          "description": "Navigate directly to the GitHub Explore page.",
+          "expected_page_url": "https://github.com/explore",
+          "verification_point": "Explore page loads with trending repositories link visible.",
+          "business_impact": "Ensures users can access the Explore page.",
+          "selector": "page.goto('https://github.com/explore', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 2,
+          "action": "Click 'Trending' link",
+          "component": "Explore Navigation",
+          "description": "Click the 'Trending' link in the Explore navigation.",
+          "expected_page_url": "https://github.com/trending",
+          "verification_point": "Trending repositories page loads.",
+          "business_impact": "Verifies discoverability of trending content.",
+          "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: 'Trending' })",
+              "strategy": "role_name",
+              "confidence": 85,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"03487116570e400898e62bd80f54e4762d40c73421fb11fcdc176710e518405c\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-selected-links=\"/trending /trending/developers /trending/developers /trending /trending\"]')",
+              "strategy": "data_attr_selected-links",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Trending$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": false
+            }
+          ],
+          "confidence": 99,
+          "based_on_interaction": true,
+          "page_context": {
+            "suggested_page_class": "ExplorePage",
+            "page_url_pattern": "/explore"
+          },
+          "method_context": {
+            "suggested_method_name": "clickTrending",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 3,
+          "action": "Click first trending repository",
+          "component": "Trending Repository Link",
+          "description": "Click the first trending repository link (e.g., 'alibaba/zvec').",
+          "expected_page_url": "https://github.com/alibaba/zvec",
+          "verification_point": "Repository page loads with navigation tabs visible.",
+          "business_impact": "Ensures users can access trending repositories.",
+          "selector": "page.getByRole('link', { name: 'alibaba / zvec' })",
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'alibaba / zvec' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /alibaba / zvec/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"ad604fbf537b55306b9f94f7f5561a84879c59f5f9ebb0bfe8787775bdbb20da\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('zvec', { exact: true })",
+              "strategy": "text_exact_extracted",
+              "confidence": 80,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'alibaba /\n\n      zvec' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            }
+          ],
+          "confidence": 99,
+          "based_on_interaction": true,
+          "page_context": {
+            "suggested_page_class": "TrendingPage",
+            "page_url_pattern": "/trending"
+          },
+          "method_context": {
+            "suggested_method_name": "clickTrendingRepo",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 4,
+          "action": "Click 'Code' tab",
+          "component": "Repository Navigation - Code Tab",
+          "description": "Click the 'Code' tab in the repository navigation to view the code base.",
+          "expected_page_url": "https://github.com/alibaba/zvec",
+          "verification_point": "'Code' tab is active and file list is displayed.",
+          "business_impact": "Validates repository content accessibility.",
+          "selector": "page.getByRole('link', { name: 'Code', exact: true })",
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'Code', exact: true })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-tab-item=\"i0code-tab\"]')",
+              "strategy": "data_attr_tab-item",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-selected-links=\"repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches repo_packages repo_deployments repo_attestations /alibaba/zvec\"]')",
+              "strategy": "data_attr_selected-links",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-hotkey=\"g c\"]')",
+              "strategy": "data_attr_hotkey",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-react-nav=\"code-view\"]')",
+              "strategy": "data_attr_react-nav",
+              "confidence": 85,
+              "is_unique": true
+            }
+          ],
+          "confidence": 99,
+          "based_on_interaction": true,
+          "page_context": {
+            "suggested_page_class": "RepositoryPage",
+            "page_url_pattern": "/alibaba/zvec"
+          },
+          "method_context": {
+            "suggested_method_name": "clickCodeTab",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 5,
+          "action": "Click 'README.md' link",
+          "component": "Repository Navigation",
+          "description": "Click the 'README.md' file link to view the repository's README.",
+          "expected_page_url": "https://github.com/alibaba/zvec/blob/main/README.md",
+          "verification_point": "README content is displayed.",
+          "business_impact": "Ensures key documentation is accessible.",
+          "selector": "page.getByRole('link', { name: 'README.md, (File)' })",
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'README.md, (File)' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /README\\.md, \\(File\\)/ })",
+              "strategy": "aria_label_regex",
+              "confidence": 96,
+              "is_unique": false
+            },
+            {
+              "selector": "page.getByRole('link', { name: /README\\.md, \\(File\\)/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": false
+            },
+            {
+              "selector": "page.getByText('README.md')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('#folder-row-17').getByRole('link', { name: 'README.md, (File)' })",
+              "strategy": "parent_id_role",
+              "confidence": 82,
+              "is_unique": false
+            }
+          ],
+          "confidence": 99,
+          "based_on_interaction": true,
+          "page_context": {
+            "suggested_page_class": "RepositoryPage",
+            "page_url_pattern": "/alibaba/zvec"
+          },
+          "method_context": {
+            "suggested_method_name": "clickReadme",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 6,
+          "action": "Click Search Bar",
+          "component": "Search Bar",
+          "description": "Click the search bar to focus for input.",
+          "expected_page_url": "https://github.com/alibaba/zvec/blob/main/README.md",
+          "verification_point": "Search input is focused and ready for typing.",
+          "business_impact": "Verifies search accessibility.",
+          "selector": "page.getByRole('button', { name: 'Search or jump to…' })",
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('button', { name: 'Search or jump to…' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "aria_label_regex",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[class*=\"Menu\"]').getByRole('button', { name: 'Search or jump to…' })",
+              "strategy": "portal_role_name",
+              "confidence": 92,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"banner\"]').getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            }
+          ],
+          "confidence": 99,
+          "based_on_interaction": true,
+          "page_context": {
+            "suggested_page_class": "RepositoryReadmePage",
+            "page_url_pattern": "/alibaba/zvec/blob/main/README.md"
+          },
+          "method_context": {
+            "suggested_method_name": "focusSearchBar",
+            "action_type": "click"
+          }
+        }
+      ],
+      "expected_results": [
+        "User can access Explore and Trending pages.",
+        "User can open a trending repository and its Code tab.",
+        "User can view the README.md file.",
+        "User can focus the search bar.",
+        "No errors or unexpected UI states occur."
+      ],
+      "edge_cases_to_test": [
+        "Slow network conditions causing delayed page loads.",
+        "Trending repository link is unavailable.",
+        "README.md file is missing.",
+        "Search bar is not interactable."
+      ],
+      "data_requirements": [
+        "Publicly accessible GitHub instance.",
+        "Trending repositories available (e.g., 'alibaba/zvec')."
+      ],
+      "prerequisites": [
+        "GitHub site is accessible and not under maintenance.",
+        "No authentication required for Explore and repository pages."
+      ],
+      "auth_required": false,
+      "starting_url": null
+    }
+  ],
+  "login_completion_state": "successful",
+  "analysis_timestamp": "2026-02-17T04:57:33.608531",
+  "confidence_score": 0.5,
+  "auth_required": false,
+  "starting_url": null
+}

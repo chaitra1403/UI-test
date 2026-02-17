@@ -1,0 +1,101 @@
+{
+  "login_scenario": "Skipped",
+  "workflow_completed": true,
+  "workflow_result": "PASS",
+  "workflow_error": "",
+  "login_agent_activity_summary": "Not available",
+  "user_scenario_agent_activity_summary": [
+    "The agent initiated the test by navigating to GitHub and creating a detailed plan for UI testing scenarios. It proceeded to explore repositories by navigating to the Explore page, clicking on 'Trending repositories', and accessing a specific repository page. The agent interacted with repository navigation elements and attempted to handle both valid and invalid repository links, capturing UI responses and screenshots where necessary. It continued by focusing on the search bar input field multiple times, preparing for further search-related test steps. Throughout, the agent demonstrated coverage of both positive and negative navigation scenarios as outlined in the user scenario."
+  ],
+  "generated_files": {
+    "feature_files": [],
+    "json_files": []
+  },
+  "scenarios": {},
+  "github_explore_trending___complete_user_journey": {
+    "testFilePath": "github.com/playwright_tests/tests/github_explore_trending___complete_user_journey.noauth.spec.js",
+    "auth_required": false,
+    "iterations_used": 1,
+    "final_status": "pass",
+    "error_summary": null
+  },
+  "token_usage": {
+    "total": {
+      "input": 301254,
+      "output": 16213,
+      "total": 317467,
+      "cost": 0.7322119999999999
+    },
+    "sessions": {
+      "main_execution": {
+        "type": "root",
+        "input": 0,
+        "output": 0,
+        "total": 0,
+        "cost": 0.0,
+        "call_count": 0,
+        "start_time": 1771303554.6340756,
+        "end_time": 1771304937.256336,
+        "duration": 1382.6222603321075
+      },
+      "systematic_exploration_scenario_1771304199": {
+        "type": "auto_created",
+        "input": 170226,
+        "output": 3438,
+        "total": 173664,
+        "cost": 0.36795599999999995,
+        "call_count": 1,
+        "start_time": 1771304199.2849104,
+        "end_time": null,
+        "duration": null
+      },
+      "scenario_llm": {
+        "type": "auto_created",
+        "input": 6784,
+        "output": 3085,
+        "total": 9869,
+        "cost": 0.038248000000000004,
+        "call_count": 1,
+        "start_time": 1771304252.6529918,
+        "end_time": null,
+        "duration": null
+      },
+      "llm_call": {
+        "type": "auto_created",
+        "input": 7757,
+        "output": 955,
+        "total": 8712,
+        "cost": 0.023154,
+        "call_count": 2,
+        "start_time": 1771304384.3855362,
+        "end_time": null,
+        "duration": null
+      },
+      "code_repair_github_explore_trending___complete_user_journey.noauth.spec.js": {
+        "type": "code_repair",
+        "input": 66739,
+        "output": 6721,
+        "total": 73460,
+        "cost": 0.187246,
+        "call_count": 7,
+        "start_time": 1771304581.9286757,
+        "end_time": 1771304753.568804,
+        "duration": 171.64012837409973
+      },
+      "code_repair_github_explore_trending___complete_user_journey_pom.noauth.spec.js": {
+        "type": "code_repair",
+        "input": 49748,
+        "output": 2014,
+        "total": 51762,
+        "cost": 0.115608,
+        "call_count": 6,
+        "start_time": 1771304793.1866286,
+        "end_time": 1771304937.2185833,
+        "duration": 144.03195476531982
+      }
+    },
+    "provider": "azure_open_ai",
+    "model": null,
+    "timestamp": "2026-02-17T05:08:57.256764"
+  }
+}
