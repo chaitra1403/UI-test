@@ -1,0 +1,300 @@
+{
+  "site_url": "https://github.com/",
+  "site_type": "unknown",
+  "site_category": "general",
+  "test_name": "explore_repositories_-_complete_user_journey",
+  "login_mechanisms": [
+    "site_navigation",
+    "content_browsing"
+  ],
+  "user_journeys": [
+    {
+      "workflow_type": "navigation_flow",
+      "path": [
+        "explore",
+        "trending",
+        "alibaba"
+      ],
+      "success_rate": "discovered_site_navigation",
+      "scenario_priority": "medium",
+      "description": "General website navigation and content discovery"
+    }
+  ],
+  "proposed_scenarios": [
+    {
+      "scenario_name": "Discovered Workflow: Explore Repositories - Complete User Journey",
+      "description": "Comprehensive test covering the journey from the homepage to trending repositories, viewing a repository's README, and handling navigation to an invalid repository.",
+      "workflow_narrative": "An anonymous user navigates to the Explore page, views trending repositories, selects a trending repository, opens its README file, and finally attempts to access an invalid repository to verify error handling. This covers both positive and negative navigation scenarios.",
+      "playwright_implementation_guidance": [
+        "Use page.goto with waitUntil: 'domcontentloaded' for navigation steps.",
+        "Use getByRole or locator selectors as provided for robust element targeting.",
+        "After navigation or click, use expect(page).toHaveURL or expect(locator).toBeVisible for verification.",
+        "For negative scenario (invalid repo), assert presence of 404 or error message.",
+        "Take screenshots after major navigation steps for visual verification."
+      ],
+      "test_type": "e2e_business_workflow",
+      "priority": "critical",
+      "business_goal": "Verify users can discover repositories and that error handling for invalid repositories works as expected.",
+      "user_story": "As an anonymous user, I want to explore trending repositories and verify error handling for invalid repositories so that I can confidently browse and understand GitHub's discoverability and robustness.",
+      "detailed_steps": [
+        {
+          "step_number": 1,
+          "action": "Navigate to Explore page",
+          "component": "Navigation",
+          "description": "Load the GitHub Explore page directly.",
+          "expected_page_url": "https://github.com/explore",
+          "verification_point": "Explore page loads with navigation menu and trending repositories visible.",
+          "business_impact": "Site accessibility and discoverability.",
+          "selector": "page.goto('https://github.com/explore', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 2,
+          "action": "Click 'Explore' in navigation bar",
+          "component": "Navigation Bar",
+          "description": "Click the 'Explore' link to ensure navigation bar works.",
+          "expected_page_url": "https://github.com/explore",
+          "verification_point": "'Explore' page remains loaded or reloads.",
+          "business_impact": "Navigation bar functionality.",
+          "selector": "page.getByRole('link', { name: 'Explore' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'Explore' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: 'Explore' })",
+              "strategy": "role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"2d649db335c5f641b76f1592449a07a2f6b93ad72adadb0fecb35f9c44196431\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-selected-links=\"/explore /explore/email /explore\"]')",
+              "strategy": "data_attr_selected-links",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a.js-selected-navigation-item.selected')",
+              "strategy": "css_combined_classes",
+              "confidence": 80,
+              "is_unique": true
+            }
+          ],
+          "page_context": {
+            "suggested_page_class": "ExplorePage",
+            "page_url_pattern": "/explore"
+          },
+          "method_context": {
+            "suggested_method_name": "clickExploreNav",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 3,
+          "action": "Click 'Trending' link",
+          "component": "Explore Repositories - Trending Link",
+          "description": "Click the 'Trending' link to view trending repositories.",
+          "expected_page_url": "https://github.com/trending",
+          "verification_point": "Trending repositories page loads.",
+          "business_impact": "Repository discoverability.",
+          "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: 'Trending' })",
+              "strategy": "role_name",
+              "confidence": 85,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"03487116570e400898e62bd80f54e4762d40c73421fb11fcdc176710e518405c\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-selected-links=\"/trending /trending/developers /trending/developers /trending /trending\"]')",
+              "strategy": "data_attr_selected-links",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Trending$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": false
+            }
+          ],
+          "page_context": {
+            "suggested_page_class": "ExplorePage",
+            "page_url_pattern": "/explore"
+          },
+          "method_context": {
+            "suggested_method_name": "clickTrendingLink",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 4,
+          "action": "Click trending repository link",
+          "component": "Trending Repository Link",
+          "description": "Click on a trending repository (e.g., 'alibaba/zvec').",
+          "expected_page_url": "https://github.com/alibaba/zvec",
+          "verification_point": "Repository page loads.",
+          "business_impact": "Repository access.",
+          "selector": "page.getByRole('link', { name: 'alibaba / zvec' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'alibaba / zvec' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /alibaba / zvec/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"ad604fbf537b55306b9f94f7f5561a84879c59f5f9ebb0bfe8787775bdbb20da\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('zvec', { exact: true })",
+              "strategy": "text_exact_extracted",
+              "confidence": 80,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'alibaba /\n\n      zvec' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            }
+          ],
+          "page_context": {
+            "suggested_page_class": "TrendingPage",
+            "page_url_pattern": "/trending"
+          },
+          "method_context": {
+            "suggested_method_name": "clickTrendingRepo",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 5,
+          "action": "Click README.md file link",
+          "component": "Repository File List - README",
+          "description": "Click the README.md file link in the repository file list.",
+          "expected_page_url": "https://github.com/alibaba/zvec/blob/main/README.md",
+          "verification_point": "README file page loads.",
+          "business_impact": "Repository documentation access.",
+          "selector": "page.getByRole('link', { name: 'README.md, (File)' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'README.md, (File)' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /README\\.md, \\(File\\)/ })",
+              "strategy": "aria_label_regex",
+              "confidence": 96,
+              "is_unique": false
+            },
+            {
+              "selector": "page.getByRole('link', { name: /README\\.md, \\(File\\)/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": false
+            },
+            {
+              "selector": "page.getByText('README.md')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('#folder-row-17').getByRole('link', { name: 'README.md, (File)' })",
+              "strategy": "parent_id_role",
+              "confidence": 82,
+              "is_unique": false
+            }
+          ],
+          "page_context": {
+            "suggested_page_class": "RepositoryPage",
+            "page_url_pattern": "/alibaba/zvec"
+          },
+          "method_context": {
+            "suggested_method_name": "clickReadmeFile",
+            "action_type": "click"
+          }
+        },
+        {
+          "step_number": 6,
+          "action": "Navigate to invalid repository URL",
+          "component": "Navigation",
+          "description": "Navigate directly to an invalid repository URL to test error handling.",
+          "expected_page_url": "https://github.com/invalid-repo-xyz",
+          "verification_point": "Error page (404) is displayed.",
+          "business_impact": "Robustness and user feedback for invalid navigation.",
+          "selector": "page.goto('https://github.com/invalid-repo-xyz', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        }
+      ],
+      "expected_results": [
+        "User completes workflow from Explore to trending repo README.",
+        "Error page is shown for invalid repository.",
+        "No unexpected errors or crashes."
+      ],
+      "edge_cases_to_test": [
+        "Slow network conditions during navigation.",
+        "User interrupts navigation (e.g., closes tab mid-way)."
+      ],
+      "data_requirements": [
+        "Public trending repositories must exist.",
+        "README.md file must be present in the selected repository."
+      ],
+      "prerequisites": [
+        "GitHub site is accessible and not under maintenance."
+      ],
+      "auth_required": false,
+      "starting_url": null
+    }
+  ],
+  "login_completion_state": "successful",
+  "analysis_timestamp": "2026-02-18T12:07:13.147815",
+  "confidence_score": 0.5,
+  "auth_required": false,
+  "starting_url": null
+}
