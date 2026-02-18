@@ -1,0 +1,1212 @@
+{
+  "site_url": "https://github.com/",
+  "site_type": "unknown",
+  "site_category": "general",
+  "test_name": "github_explore_trending_-_complete_user_journey",
+  "login_mechanisms": [
+    "content_browsing",
+    "site_navigation"
+  ],
+  "user_journeys": [
+    {
+      "workflow_type": "navigation_flow",
+      "path": [
+        "explore",
+        "trending",
+        "invalid",
+        "homepage",
+        "search",
+        "p-e-w"
+      ],
+      "success_rate": "discovered_site_navigation",
+      "scenario_priority": "medium",
+      "description": "General website navigation and content discovery"
+    }
+  ],
+  "proposed_scenarios": [
+    {
+      "scenario_name": "Discovered Workflow: GitHub Non-Login Repository Discovery & Search - Complete User Journey",
+      "description": "Comprehensive test covering repository exploration, search, autocomplete, and filter sidebar navigation, including negative scenarios.",
+      "workflow_narrative": "A guest user lands on GitHub, explores trending repositories, attempts to access an invalid repo, and exercises the search bar with valid and invalid queries. The user interacts with search suggestion dropdowns and sidebar filters, verifying UI responses for both successful and negative paths.",
+      "playwright_implementation_guidance": [
+        "Use waitForSelector after each navigation and click to ensure UI is ready.",
+        "Capture screenshots after each critical step for evidence.",
+        "Use all selectors provided for robust targeting and fallback.",
+        "Use input actions with clear flag where necessary to reset fields.",
+        "Visually verify error states after negative scenarios (e.g., invalid repo, invalid search)."
+      ],
+      "test_type": "e2e_business_workflow",
+      "priority": "critical",
+      "business_goal": "Verify users can complete repository discovery, search, and filtering workflows, including handling of negative cases.",
+      "user_story": "As a guest user, I want to explore trending repositories, search for projects, and use filters so that I can efficiently discover content on GitHub without logging in.",
+      "detailed_steps": [
+        {
+          "step_number": 1,
+          "action": "Navigate to homepage",
+          "component": "Navigation",
+          "description": "Load GitHub homepage.",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Page loaded",
+          "business_impact": "Site accessibility",
+          "selector": "page.goto('https://github.com/', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 2,
+          "action": "Navigate to Explore page",
+          "component": "Explore Navigation",
+          "description": "Go to the Explore page to begin repository discovery.",
+          "expected_page_url": "https://github.com/explore",
+          "verification_point": "Explore page loads",
+          "business_impact": "Repository discovery",
+          "selector": "page.goto('https://github.com/explore', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 3,
+          "action": "Click 'Trending' link",
+          "component": "Explore Navigation - Trending Repositories Link",
+          "description": "Click the Trending repositories link.",
+          "expected_page_url": "https://github.com/trending",
+          "verification_point": "Trending repositories displayed",
+          "business_impact": "User can discover popular repositories",
+          "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: 'Trending' })",
+              "strategy": "role_name",
+              "confidence": 85,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"03487116570e400898e62bd80f54e4762d40c73421fb11fcdc176710e518405c\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-selected-links=\"/trending /trending/developers /trending/developers /trending /trending\"]')",
+              "strategy": "data_attr_selected-links",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Trending$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": false
+            }
+          ]
+        },
+        {
+          "step_number": 4,
+          "action": "Click first trending repository",
+          "component": "Trending Repository Link",
+          "description": "Select a trending repository.",
+          "expected_page_url": "https://github.com/p-e-w/heretic",
+          "verification_point": "Repository page loads",
+          "business_impact": "Repository content accessible",
+          "selector": "page.getByRole('link', { name: 'p-e-w / heretic' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'p-e-w / heretic' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /p-e-w / heretic/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"ad1873e8ce155c69a2102c9d156c7529bce6422383a2a160262087f31e770159\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('heretic', { exact: true })",
+              "strategy": "text_exact_extracted",
+              "confidence": 82,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'p-e-w /\n\n      heretic' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 5,
+          "action": "Click repository navigation element",
+          "component": "Repository Navigation",
+          "description": "Interact with repository navigation (e.g., Skip to content).",
+          "expected_page_url": "https://github.com/p-e-w/heretic",
+          "verification_point": "Navigation element responds",
+          "business_impact": "Accessibility and navigation",
+          "selector": "page.getByRole('link', { name: 'Skip to content' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'Skip to content' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /Skip to content/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Skip to content')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-skip-target-assigned=\"false\"]')",
+              "strategy": "data_attr_skip-target-assigned",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a.px-2.py-4')",
+              "strategy": "css_combined_classes",
+              "confidence": 80,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 6,
+          "action": "Click invalid repository link (UI negative test)",
+          "component": "Invalid Repository Link",
+          "description": "Attempt to click an invalid repository UI element to trigger error.",
+          "expected_page_url": "https://github.com/p-e-w/heretic#start-of-content",
+          "verification_point": "Error or no-op",
+          "business_impact": "Error handling and robustness",
+          "selector": "page.locator('.d-flex.flex-column > .AppHeader-appearanceSettings')",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.locator('.d-flex.flex-column > .AppHeader-appearanceSettings')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('div.AppHeader-appearanceSettings')",
+              "strategy": "css_stable_class",
+              "confidence": 78,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('xpath=html/body/div[1]/div[2]/header/div/div[2]/div/div/div[2]')",
+              "strategy": "xpath",
+              "confidence": 50,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 7,
+          "action": "Navigate to invalid repository URL (negative test)",
+          "component": "Navigation",
+          "description": "Directly navigate to a non-existent repository URL.",
+          "expected_page_url": "https://github.com/invalid/repo",
+          "verification_point": "Error page appears",
+          "business_impact": "Error handling and user feedback",
+          "selector": "page.goto('https://github.com/invalid/repo', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 8,
+          "action": "Click search bar on error page",
+          "component": "Search Bar Input",
+          "description": "Focus the search bar input for next search interactions.",
+          "expected_page_url": "https://github.com/invalid/repo",
+          "verification_point": "Search bar focused",
+          "business_impact": "Search accessibility",
+          "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form[action*=\"search\"]').getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "form_action_role_regex",
+              "confidence": 97,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label_text",
+              "confidence": 93,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label",
+              "confidence": 90,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 9,
+          "action": "Input 'valid repository' in search bar",
+          "component": "Search Bar Input",
+          "description": "Type 'valid repository' in the search bar.",
+          "expected_page_url": "https://github.com/invalid/repo",
+          "verification_point": "Input value appears",
+          "business_impact": "Search functionality",
+          "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form[action*=\"search\"]').getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "form_action_role_regex",
+              "confidence": 97,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label_text",
+              "confidence": 93,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label",
+              "confidence": 90,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 10,
+          "action": "Input 'valid user' in search bar",
+          "component": "Search Bar Input",
+          "description": "Type 'valid user' in the search bar.",
+          "expected_page_url": "https://github.com/invalid/repo",
+          "verification_point": "Input value appears",
+          "business_impact": "Search functionality",
+          "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form[action*=\"search\"]').getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "form_action_role_regex",
+              "confidence": 97,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label_text",
+              "confidence": 93,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label",
+              "confidence": 90,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 11,
+          "action": "Input 'valid issue' in search bar",
+          "component": "Search Bar Input",
+          "description": "Type 'valid issue' in the search bar.",
+          "expected_page_url": "https://github.com/invalid/repo",
+          "verification_point": "Input value appears",
+          "business_impact": "Search functionality",
+          "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form[action*=\"search\"]').getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "form_action_role_regex",
+              "confidence": 97,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label_text",
+              "confidence": 93,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label",
+              "confidence": 90,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 12,
+          "action": "Input invalid/random string in search bar",
+          "component": "Search Bar Input",
+          "description": "Type 'invalid or random strings' in the search bar.",
+          "expected_page_url": "https://github.com/invalid/repo",
+          "verification_point": "Input value appears or error triggered",
+          "business_impact": "Negative search handling",
+          "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('textbox', { name: 'Find code, projects, and' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form[action*=\"search\"]').getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "form_action_role_regex",
+              "confidence": 97,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('textbox', { name: /Find code, projects, and people on GitHub:/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label_text",
+              "confidence": 93,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Find code, projects, and people on GitHub:')",
+              "strategy": "label",
+              "confidence": 90,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 13,
+          "action": "Navigate to homepage for valid search context",
+          "component": "Navigation",
+          "description": "Return to homepage to ensure search bar is active.",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Homepage loaded",
+          "business_impact": "Valid search context",
+          "selector": "page.goto('https://github.com/', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 14,
+          "action": "Click main search bar",
+          "component": "Main Search Bar",
+          "description": "Focus the main search bar.",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Search modal opens",
+          "business_impact": "User can start a search",
+          "selector": "page.getByRole('button', { name: 'Search or jump to…' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('button', { name: 'Search or jump to…' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "aria_label_regex",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[class*=\"Menu\"]').getByRole('button', { name: 'Search or jump to…' })",
+              "strategy": "portal_role_name",
+              "confidence": 92,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"banner\"]').getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 15,
+          "action": "Input 'valid repository' in search modal",
+          "component": "Search Modal Input",
+          "description": "Type 'valid repository' in the search modal input.",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Input value appears",
+          "business_impact": "Search modal works",
+          "selector": "page.getByRole('combobox', { name: 'Search' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form#query-builder-test-form').getByRole('combobox', { name: 'Search' })",
+              "strategy": "form_id_role",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"dialog\"]').getByRole('combobox', { name: 'Search' })",
+              "strategy": "portal_role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Search', { exact: true })",
+              "strategy": "label_text_exact",
+              "confidence": 92,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 16,
+          "action": "Click search suggestion for 'valid repository'",
+          "component": "Search Suggestion",
+          "description": "Select the autocomplete suggestion for 'valid repository'.",
+          "expected_page_url": "https://github.com/search?q=valid%20repository&type=repositories",
+          "verification_point": "Search results for repository",
+          "business_impact": "Autocomplete improves UX",
+          "selector": "page.getByRole('option', { name: 'valid repository, Search all' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('option', { name: 'valid repository, Search all' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('option', { name: /valid repository, Search all of GitHub/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: 'valid repository, Search all of GitHub' })",
+              "strategy": "portal_role_name",
+              "confidence": 94,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: /valid repository, Search all of GitHub/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('li[data-type=\"command-result\"]')",
+              "strategy": "data_attr_type",
+              "confidence": 85,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 17,
+          "action": "Input 'valid user' in search bar",
+          "component": "Search Modal Input",
+          "description": "Type 'valid user' in the search bar.",
+          "expected_page_url": "https://github.com/search?q=valid%20repository&type=repositories",
+          "verification_point": "Input value appears",
+          "business_impact": "Search for users",
+          "selector": "page.getByRole('combobox', { name: 'Search' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form#query-builder-test-form').getByRole('combobox', { name: 'Search' })",
+              "strategy": "form_id_role",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"dialog\"]').getByRole('combobox', { name: 'Search' })",
+              "strategy": "portal_role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Search', { exact: true })",
+              "strategy": "label_text_exact",
+              "confidence": 92,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 18,
+          "action": "Click search suggestion for 'valid user'",
+          "component": "Search Autocomplete Suggestion",
+          "description": "Select the autocomplete suggestion for 'valid user'.",
+          "expected_page_url": "https://github.com/search?q=valid+user&type=repositories",
+          "verification_point": "Search results for user",
+          "business_impact": "Autocomplete improves UX",
+          "selector": "page.getByRole('option', { name: 'valid user, Search all of' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('option', { name: 'valid user, Search all of' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('option', { name: /valid user, Search all of GitHub/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: 'valid user, Search all of GitHub' })",
+              "strategy": "portal_role_name",
+              "confidence": 94,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: /valid user, Search all of GitHub/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('li[data-type=\"command-result\"]')",
+              "strategy": "data_attr_type",
+              "confidence": 85,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 19,
+          "action": "Input 'valid issue' in search bar",
+          "component": "Search Modal Input",
+          "description": "Type 'valid issue' in the search bar.",
+          "expected_page_url": "https://github.com/search?q=valid+user&type=repositories",
+          "verification_point": "Input value appears",
+          "business_impact": "Search for issues",
+          "selector": "page.getByRole('combobox', { name: 'Search' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form#query-builder-test-form').getByRole('combobox', { name: 'Search' })",
+              "strategy": "form_id_role",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"dialog\"]').getByRole('combobox', { name: 'Search' })",
+              "strategy": "portal_role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Search', { exact: true })",
+              "strategy": "label_text_exact",
+              "confidence": 92,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 20,
+          "action": "Click search suggestion for 'valid issue'",
+          "component": "Search Suggestions Autocomplete",
+          "description": "Select the autocomplete suggestion for 'valid issue'.",
+          "expected_page_url": "https://github.com/search?q=valid+issue&type=repositories",
+          "verification_point": "Search results for issue",
+          "business_impact": "Autocomplete improves UX",
+          "selector": "page.getByRole('option', { name: 'valid issue, Search all of' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('option', { name: 'valid issue, Search all of' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('option', { name: /valid issue, Search all of GitHub/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: 'valid issue, Search all of GitHub' })",
+              "strategy": "portal_role_name",
+              "confidence": 94,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: /valid issue, Search all of GitHub/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('li[data-type=\"command-result\"]')",
+              "strategy": "data_attr_type",
+              "confidence": 85,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 21,
+          "action": "Input invalid/random string in search bar",
+          "component": "Search Modal Input",
+          "description": "Type 'asdfgh123!@#' in the search bar for negative test.",
+          "expected_page_url": "https://github.com/search?q=valid+issue&type=repositories",
+          "verification_point": "Input value appears or error triggered",
+          "business_impact": "Negative search handling",
+          "selector": "page.getByRole('combobox', { name: 'Search' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form#query-builder-test-form').getByRole('combobox', { name: 'Search' })",
+              "strategy": "form_id_role",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"dialog\"]').getByRole('combobox', { name: 'Search' })",
+              "strategy": "portal_role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Search', { exact: true })",
+              "strategy": "label_text_exact",
+              "confidence": 92,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 22,
+          "action": "Click search suggestion for invalid/random string",
+          "component": "Search Suggestion Dropdown",
+          "description": "Select the autocomplete suggestion for 'asdfgh123!@#'.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=repositories",
+          "verification_point": "Error or empty state appears",
+          "business_impact": "Negative path UX",
+          "selector": "page.getByRole('option', { name: 'asdfgh123!@#, Search all of' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('option', { name: 'asdfgh123!@#, Search all of' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('option', { name: /asdfgh123!@#, Search all of GitHub/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: 'asdfgh123!@#, Search all of GitHub' })",
+              "strategy": "portal_role_name",
+              "confidence": 94,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: /asdfgh123!@#, Search all of GitHub/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('li[data-type=\"command-result\"]')",
+              "strategy": "data_attr_type",
+              "confidence": 85,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 23,
+          "action": "Click Sort dropdown",
+          "component": "Filter Dropdown",
+          "description": "Open the sort dropdown to change sorting.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=repositories",
+          "verification_point": "Sort dropdown opens",
+          "business_impact": "Sorting improves search results usability",
+          "selector": "page.getByTestId('sort-button')",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByTestId('sort-button')",
+              "strategy": "testid",
+              "confidence": 100,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByTestId('sort-button')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Sort')",
+              "strategy": "text_phrase",
+              "confidence": 78,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('button[data-loading=\"false\"]')",
+              "strategy": "data_attr_loading",
+              "confidence": 75,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('button[data-size=\"small\"]')",
+              "strategy": "data_attr_size",
+              "confidence": 75,
+              "is_unique": false
+            }
+          ]
+        },
+        {
+          "step_number": 24,
+          "action": "Click Filters dropdown",
+          "component": "Filters Dropdown",
+          "description": "Open the filters dropdown.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=repositories",
+          "verification_point": "Filters dropdown opens",
+          "business_impact": "Filtering search results",
+          "selector": "page.getByTestId('nav-item-code')",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByTestId('nav-item-code')",
+              "strategy": "testid",
+              "confidence": 100,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByTestId('nav-item-code')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('#_R_1f6qmdb_')",
+              "strategy": "id",
+              "confidence": 75,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Code\\.\\.\\. \\(\\.\\.\\.\\)results$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'Code... (...)results' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 25,
+          "action": "Click 'Filter by' heading",
+          "component": "Filters Dropdown",
+          "description": "Click the 'Filter by' heading to interact with filter UI.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=code",
+          "verification_point": "Filter UI responds",
+          "business_impact": "Filtering search results",
+          "selector": "page.getByRole('heading', { name: 'Filter by' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('heading', { name: 'Filter by' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('heading', { name: /Filter by/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"region\"]').getByRole('heading', { name: /Filter by/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Filter by')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Filter')",
+              "strategy": "text_phrase",
+              "confidence": 80,
+              "is_unique": false
+            }
+          ]
+        },
+        {
+          "step_number": 26,
+          "action": "Click 'Repositories' sidebar filter",
+          "component": "Filters Sidebar Link - Repositories",
+          "description": "Click the 'Repositories' link in the sidebar filter.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=code",
+          "verification_point": "Repositories filter applied",
+          "business_impact": "Filtering search results",
+          "selector": "page.getByTestId('nav-item-repositories')",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByTestId('nav-item-repositories')",
+              "strategy": "testid",
+              "confidence": 100,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByTestId('nav-item-repositories')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('#_R_2f6qmdb_')",
+              "strategy": "id",
+              "confidence": 75,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Repositories0 \\(0\\)results$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'Repositories0 (0)results' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 27,
+          "action": "Click 'Issues' sidebar filter",
+          "component": "Filter Sidebar",
+          "description": "Click the 'Issues' link in the sidebar filter.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=code",
+          "verification_point": "Issues filter applied",
+          "business_impact": "Filtering search results",
+          "selector": "page.getByTestId('nav-item-issues')",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByTestId('nav-item-issues')",
+              "strategy": "testid",
+              "confidence": 100,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByTestId('nav-item-issues')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('#_R_3f6qmdb_')",
+              "strategy": "id",
+              "confidence": 75,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Issues4 \\(4\\)results$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'Issues4 (4)results' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 28,
+          "action": "Click 'Pull requests' sidebar filter",
+          "component": "Filters Sidebar - Pull Requests",
+          "description": "Click the 'Pull requests' link in the sidebar filter.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=issues",
+          "verification_point": "Pull requests filter applied",
+          "business_impact": "Filtering search results",
+          "selector": "page.getByTestId('nav-item-pullrequests')",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByTestId('nav-item-pullrequests')",
+              "strategy": "testid",
+              "confidence": 100,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByTestId('nav-item-pullrequests')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('#_R_4f6qmdb_')",
+              "strategy": "id",
+              "confidence": 75,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Pull requests1 \\(1\\)results$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'Pull requests1 (1)results' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 29,
+          "action": "Click 'Discussions' sidebar filter",
+          "component": "Sidebar Filter - Discussions",
+          "description": "Click the 'Discussions' link in the sidebar filter.",
+          "expected_page_url": "https://github.com/search?q=asdfgh123%21%40%23&type=pullrequests",
+          "verification_point": "Discussions filter applied",
+          "business_impact": "Filtering search results",
+          "selector": "page.getByTestId('nav-item-discussions')",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByTestId('nav-item-discussions')",
+              "strategy": "testid",
+              "confidence": 100,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByTestId('nav-item-discussions')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Discussions')",
+              "strategy": "text_phrase",
+              "confidence": 78,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('#_R_5f6qmdb_')",
+              "strategy": "id",
+              "confidence": 75,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Discussions0 \\(0\\)results$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": true
+            }
+          ]
+        }
+      ],
+      "expected_results": [
+        "User completes repository exploration and search workflow",
+        "Negative scenarios (invalid repo, invalid search) show correct error states",
+        "All filters and sorting options are interactable",
+        "No unexpected errors or UI failures"
+      ],
+      "edge_cases_to_test": [
+        "Slow network conditions",
+        "UI interruptions (e.g., overlays, popups)",
+        "Invalid input handling in search"
+      ],
+      "data_requirements": [
+        "No login required",
+        "Test search values: 'valid repository', 'valid user', 'valid issue', 'asdfgh123!@#'"
+      ],
+      "prerequisites": [
+        "Site accessible",
+        "No authentication required"
+      ],
+      "auth_required": false,
+      "starting_url": null
+    }
+  ],
+  "login_completion_state": "successful",
+  "analysis_timestamp": "2026-02-18T08:48:25.609536",
+  "confidence_score": 0.5,
+  "auth_required": false,
+  "starting_url": null
+}

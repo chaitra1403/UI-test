@@ -1,45 +1,77 @@
-Feature: GitHub Website Navigation and Content Discovery
-  As a visitor, I want to explore trending repositories, navigate to their content, and interact with the search bar
+Feature: Explore Trending Repositories and Repository Navigation on GitHub
+  As a visitor
+  I want to browse trending repositories and interact with repository navigation
   So that I can discover interesting open source projects without authentication
 
-  @e2e @navigation @explore @trending @critical
-  Scenario: Discovering Trending Repositories and Navigating to Repository Content
+  @navigation @e2e @critical
+  Scenario: Discovered Workflow: GitHub Explore & Trending - Complete User Journey
+    # Home and Explore
     Given I am on the homepage 'https://github.com/'
-    When I verify the homepage title is "GitHub: Let’s build from here · GitHub"
-    Then the "Explore" navigation link should be visible in the site header
+    Then the page title should be 'GitHub: Let’s build from here · GitHub'
+    And the "Explore" navigation link with text "Explore" should be visible in the site header
 
-    When I click the "Explore" navigation link in the site header
-    Then I should be on the Explore page at url "https://github.com/explore"
-    And the "Trending" link should be visible in the Explore navigation section
+    When I click the "Explore" navigation link with text "Explore" in the site header
+    Then I should be on the Explore page at URL 'https://github.com/explore'
+    And the heading "Explore GitHub" should be visible
+    And the "Trending" link with role "link" and text "Trending" should be visible in the Explore navigation
 
-    When I click the "Trending" link in the Explore navigation section
-    Then I should be on the Trending page at url "https://github.com/trending"
-    And the list of trending repositories should be visible
-    And the trending repository link with exact text "alibaba / zvec" should be visible
+    # Trending Repositories
+    When I click the "Trending" link with role "link" and text "Trending" in the Explore navigation
+    Then I should be on the Trending page at URL 'https://github.com/trending'
+    And the page heading "Trending" should be visible
+    And a repository link with full name "alibaba / zvec" should be present in the trending repositories list
 
-    When I click the trending repository link with exact text "alibaba / zvec"
-    Then I should be on the repository page at url "https://github.com/alibaba/zvec"
-    And the repository navigation tabs should be visible
-    And the "Code" tab should be present in the repository navigation tabs
+    # Trending Repository
+    When I click the repository link with text "alibaba / zvec" in the trending repositories list
+    Then I should be on the repository page at URL 'https://github.com/alibaba/zvec'
+    And the repository title "alibaba / zvec" should be visible in the repository header
+    And the navigation tab with role "link" and text "Code" should be visible
 
-    When I click the "Code" tab in the repository navigation tabs
-    Then I should remain on the repository code page at url "https://github.com/alibaba/zvec"
-    And the file list should be displayed in the code section
-    And the file link with exact text "README.md, (File)" should be visible in the file list
+    # Code Tab
+    When I click the "Code" tab with role "link" and text "Code" in the repository navigation
+    Then I should remain on the page with URL 'https://github.com/alibaba/zvec'
+    And the file list should be displayed in the repository content area
+    And the "README.md" file link with role "link" and label "README.md, (File)" should be visible in the file list
 
-    When I click the file link with exact text "README.md, (File)" in the file list
-    Then I should be on the README file page at url "https://github.com/alibaba/zvec/blob/main/README.md"
-    And the README content should be visible in the repository file view
+    # README.md
+    When I click the "README.md" file link with role "link" and label "README.md, (File)" in the file list
+    Then I should be on the README.md page at URL matching 'https://github.com/alibaba/zvec/blob/main/README.md'
+    And the README.md content section should be visible
 
-    When I click the search bar button with exact text "Search or jump to…"
-    Then the search input box should be focused and ready for typing
+    # Search Bar
+    When I click the "Search or jump to…" button with role "button" in the site header
+    Then the search input should be focused and ready for input
 
-    # Negative assertions for edge cases
-    But the trending repository link with exact text "alibaba / zvec" should not be missing
-    But the file link with exact text "README.md, (File)" should not be missing
-    But the search bar button with exact text "Search or jump to…" should not be disabled
+    # Error checks and resilience
+    And there should be no error messages or unexpected UI states present on the page
 
-    # Explicit verifications after each user action
-    # Granular navigation tracking and element validations
+  @edge @slowNetwork
+  Scenario: Trending repository is missing or unavailable
+    Given I am on the homepage 'https://github.com/'
+    When I click the "Explore" navigation link with text "Explore" in the site header
+    And I click the "Trending" link with role "link" and text "Trending" in the Explore navigation
+    Then the repository link with text "alibaba / zvec" should not be present in the trending repositories list
+    And a message "No trending repositories found" or similar notice should be displayed
 
-    # Home page initialization ensures independent test execution
+  @edge @slowNetwork
+  Scenario: README.md file is missing in the trending repository
+    Given I am on the homepage 'https://github.com/'
+    When I click the "Explore" navigation link with text "Explore" in the site header
+    And I click the "Trending" link with role "link" and text "Trending" in the Explore navigation
+    And I click the repository link with text "alibaba / zvec" in the trending repositories list
+    And I click the "Code" tab with role "link" and text "Code" in the repository navigation
+    Then the "README.md" file link with role "link" and label "README.md, (File)" should not be visible in the file list
+    And a message "README.md not found" or similar notice should be displayed
+
+  @edge @slowNetwork
+  Scenario: Search bar is not interactable
+    Given I am on the homepage 'https://github.com/'
+    When I click the "Explore" navigation link with text "Explore" in the site header
+    And I click the "Trending" link with role "link" and text "Trending" in the Explore navigation
+    And I click the repository link with text "alibaba / zvec" in the trending repositories list
+    And I click the "README.md" file link with role "link" and label "README.md, (File)" in the file list
+    When I attempt to click the "Search or jump to…" button with role "button" in the site header
+    Then the search input should not be focused
+    And a message or visual indication that the search bar is disabled or unavailable should be displayed
+
+  # Data requirements, network resilience and prerequisites are assumed controlled by the automation test runner/environment.

@@ -1,6 +1,6 @@
 /*
  * RepositoryPage.js - Models a GitHub repository page
- * Handles navigation to the Code tab and README.md file
+ * Handles navigation to the Code tab, README.md file, 'Skip to content', and invalid repo UI elements
  */
 
 import { BasePage } from './BasePage.js';
@@ -26,6 +26,20 @@ export class RepositoryPage extends BasePage {
     // 3. page.getByText('README.md')
     // 4. page.locator('#folder-row-17').getByRole('link', { name: 'README.md, (File)' })
     this.readmeLink = this.page.getByRole('link', { name: 'README.md, (File)' });
+
+    // 'Skip to content' link selectors (up to 5 for resilience):
+    // 1. page.getByRole('link', { name: 'Skip to content' })
+    // 2. page.getByRole('link', { name: /Skip to content/ })
+    // 3. page.getByText('Skip to content')
+    // 4. page.locator('a[data-skip-target-assigned="false"]')
+    // 5. page.locator('a.px-2.py-4')
+    this.skipToContentLink = this.page.getByRole('link', { name: 'Skip to content' });
+
+    // Invalid repository UI element selectors (up to 5 for resilience):
+    // 1. page.locator('.d-flex.flex-column > .AppHeader-appearanceSettings')
+    // 2. page.locator('div.AppHeader-appearanceSettings')
+    // 3. page.locator('xpath=html/body/div[1]/div[2]/header/div/div[2]/div/div/div[2]')
+    this.invalidRepoUiElement = this.page.locator('.d-flex.flex-column > .AppHeader-appearanceSettings');
   }
 
   /**
@@ -48,5 +62,27 @@ export class RepositoryPage extends BasePage {
     await this.readmeLink.click({ timeout: 30000 });
     await this.waitForURL(/\/alibaba\/zvec\/blob\/main\/README\.md$/, 60000);
     return new RepositoryReadmePage(this.page);
+  }
+
+  /**
+   * Clicks the 'Skip to content' link for accessibility
+   * @returns {Promise<this>}
+   */
+  async clickSkipToContent() {
+    await this.skipToContentLink.waitFor({ state: 'visible', timeout: 15000 });
+    await this.skipToContentLink.click({ timeout: 30000 });
+    // No navigation expected
+    return this;
+  }
+
+  /**
+   * Clicks the invalid repository UI element (for negative test)
+   * @returns {Promise<this>}
+   */
+  async clickInvalidRepoUiElement() {
+    await this.invalidRepoUiElement.waitFor({ state: 'visible', timeout: 15000 });
+    await this.invalidRepoUiElement.click({ timeout: 15000 });
+    // No navigation expected; error or no-op
+    return this;
   }
 }
