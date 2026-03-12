@@ -1,0 +1,152 @@
+{
+  "metadata_version": "1.0",
+  "created_at": "2026-03-12T05:39:59.595742",
+  "last_updated": "2026-03-12T07:08:40.503729",
+  "pom_files": [
+    {
+      "url": "https://github.com/",
+      "file_name": "HomePage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/HomePage.js"
+    },
+    {
+      "url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories&s=stars&o=desc",
+      "file_name": "SearchPage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+    },
+    {
+      "url": "https://github.com/search?q=torvalds&type=repositories",
+      "file_name": "SearchPage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+    },
+    {
+      "url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories&s=stars&o=asc",
+      "file_name": "SearchPage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+    },
+    {
+      "url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories",
+      "file_name": "SearchPage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+    },
+    {
+      "url": "https://github.com/explore",
+      "file_name": "ExplorePage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/ExplorePage.js"
+    },
+    {
+      "url": "https://github.com/trending",
+      "file_name": "TrendingPage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/TrendingPage.js"
+    },
+    {
+      "url": "https://github.com/msitarzewski/agency-agents/blob/main/README.md",
+      "file_name": "ReadmePage.js",
+      "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/ReadmePage.js"
+    }
+  ],
+  "Login_File": {
+    "name": null,
+    "path": null,
+    "hash": null,
+    "agent_workflow_completed": false,
+    "agent_workflow_file_path": null,
+    "agent_interaction_file_path": null,
+    "agent_activity_summary": null,
+    "agent_activity_error": null,
+    "agent_activity_outcome": null,
+    "agent_recommendation": null,
+    "agent_completion_level": null,
+    "agent_steps_completed": null,
+    "scenario_name": null,
+    "scenario_file_path": null,
+    "test_generated": false,
+    "test_generation_error": null,
+    "test_file_path": null,
+    "test_executed_success": null,
+    "test_execution_error": null,
+    "pom_test_name": null,
+    "pom_test_file_path": null,
+    "pom_test_executed_success": null,
+    "pom_test_execution_error": null,
+    "pom_files": null
+  },
+  "User_Scenarios_File": [
+    {
+      "name": "github_scenario.md",
+      "path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/github_scenario.md",
+      "hash": "713ed93816a9ee71f7cf49e6b6891892c6964fbb5ed296f0bbec80af7b0a7ad8",
+      "agent_workflow_completed": true,
+      "agent_workflow_file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/temp_info/github.com/extracted_data/interaction_data_d958611465b729313dd4cbce7af9fc0658bfd79b8af72d20b40773a6f12247df.json",
+      "agent_activity_summary": [
+        "The agent systematically executed the GitHub UI Testing Scenarios (Non-Login), beginning with navigation to the Explore page and proceeding through repository exploration, search functionality (including both valid and invalid queries), filter application, and error handling. The agent performed both positive and negative test cases, such as accessing valid repositories and triggering error states with invalid links. Despite encountering an element lookup error early in the flow, the agent recovered by identifying alternative selectors and continued with the scenario. All major scenario steps—including navigation, search, filter application, and negative path validation—were executed, and the agent reached the intended final state, confirming the scenario's objectives were met."
+      ],
+      "agent_activity_error": [
+        "At Step 2, the agent encountered an error when attempting to click the 'Trending repository' link due to a failed element lookup (index 496). The agent recovered by capturing a stable selector for the 'Trending' navigation link at a different index (4896) and proceeded with the scenario. No other blocking errors occurred, and all subsequent actions were completed as intended."
+      ],
+      "agent_activity_outcome": [
+        "The agent achieved the final goal of the scenario by successfully executing both success and negative test cases for GitHub's non-login UI, including repository exploration, search, filter application, and error handling. The scenario's objectives were fully realized."
+      ],
+      "agent_recommendation": "Review and refine element selector strategies to reduce the likelihood of lookup errors, especially for dynamic or frequently changing UI elements. Consider implementing more robust selector identification or fallback mechanisms to further improve resilience. No rerun is required as the scenario was completed successfully.",
+      "agent_completion_level": "complete",
+      "agent_steps_completed": null,
+      "scenario_analysis_result_file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/temp_info/github.com/extracted_data/user_scenario_d958611465b729313dd4cbce7af9fc0658bfd79b8af72d20b40773a6f12247df.json",
+      "scenario_name": "github_explore_search_non-login_-_complete_user_journey",
+      "scenario_file_path": "scenarios/github_explore_search_non-login_-_complete_user_jo.json",
+      "feature_file_path": null,
+      "feature_file_name": null,
+      "test_generated": false,
+      "test_generation_error": null,
+      "test_name": "github_explore_search_non_login___complete_user_journey_pom.noauth.spec.js",
+      "test_file_path": "pom_tests/github_explore_search_non_login___complete_user_journey_pom.noauth.spec.js",
+      "test_execution_error": null,
+      "test_executed_success": true,
+      "pom_test_name": "github_explore_search_non_login___complete_user_journey_pom.noauth.spec.js",
+      "pom_test_file_path": "pom_tests/github_explore_search_non_login___complete_user_journey_pom.noauth.spec.js",
+      "pom_test_executed_success": true,
+      "pom_test_execution_error": null,
+      "pom_files": [
+        {
+          "url": "https://github.com/",
+          "file_name": "HomePage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/HomePage.js"
+        },
+        {
+          "url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories&s=stars&o=desc",
+          "file_name": "SearchPage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+        },
+        {
+          "url": "https://github.com/search?q=torvalds&type=repositories",
+          "file_name": "SearchPage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+        },
+        {
+          "url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories&s=stars&o=asc",
+          "file_name": "SearchPage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+        },
+        {
+          "url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories",
+          "file_name": "SearchPage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/SearchPage.js"
+        },
+        {
+          "url": "https://github.com/explore",
+          "file_name": "ExplorePage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/ExplorePage.js"
+        },
+        {
+          "url": "https://github.com/trending",
+          "file_name": "TrendingPage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/TrendingPage.js"
+        },
+        {
+          "url": "https://github.com/msitarzewski/agency-agents/blob/main/README.md",
+          "file_name": "ReadmePage.js",
+          "file_path": "/var/tmp/Roost/RoostGPT/Github_UI_Test_clone/e9e7b74b-1434-4c3b-aece-c63da8a3cd84/source/UI-test/generated_tests/github.com/playwright_tests/pom_tests/pom/ReadmePage.js"
+        }
+      ]
+    }
+  ],
+  "Exploration_Scenarios": []
+}

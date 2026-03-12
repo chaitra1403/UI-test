@@ -1,0 +1,220 @@
+{
+  "accessibility_tree": {
+    "role": "WebArea",
+    "name": "Repository search results · GitHub",
+    "children": [
+      {
+        "role": "link",
+        "name": "Skip to content"
+      },
+      {
+        "role": "heading",
+        "name": "Navigation Menu",
+        "level": 2
+      },
+      {
+        "role": "button",
+        "name": "Toggle navigation"
+      },
+      {
+        "role": "link",
+        "name": "Homepage"
+      },
+      {
+        "role": "link",
+        "name": "Sign in"
+      },
+      {
+        "role": "button",
+        "name": "Appearance settings",
+        "haspopup": "menu"
+      },
+      {
+        "role": "heading",
+        "name": "repositories Search Results · sdkfjhasdkfjh",
+        "level": 1
+      },
+      {
+        "role": "heading",
+        "name": "Filter by",
+        "level": 2
+      },
+      {
+        "role": "link",
+        "name": "Code  (...) results"
+      },
+      {
+        "role": "link",
+        "name": "Repositories  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Issues  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Pull requests  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Discussions  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Users  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Commits  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Packages  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Wikis  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Topics  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Marketplace  (0) results"
+      },
+      {
+        "role": "link",
+        "name": "Advanced search"
+      },
+      {
+        "role": "slider",
+        "name": "Draggable pane splitter",
+        "valuetext": "Pane width 289 pixels",
+        "valuemin": 256,
+        "valuemax": 289,
+        "orientation": "horizontal",
+        "value": 289
+      },
+      {
+        "role": "text",
+        "name": "0 results"
+      },
+      {
+        "role": "text",
+        "name": " ("
+      },
+      {
+        "role": "text",
+        "name": "62"
+      },
+      {
+        "role": "text",
+        "name": " "
+      },
+      {
+        "role": "text",
+        "name": "ms"
+      },
+      {
+        "role": "text",
+        "name": ")"
+      },
+      {
+        "role": "heading",
+        "name": "0 results",
+        "level": 2
+      },
+      {
+        "role": "button",
+        "name": "Sort by: Best match",
+        "focused": true,
+        "haspopup": "menu"
+      },
+      {
+        "role": "button",
+        "name": "Open column options",
+        "haspopup": "menu"
+      },
+      {
+        "role": "image",
+        "name": "Mona looking through a globe hologram for code"
+      },
+      {
+        "role": "heading",
+        "name": "Your search did not match any repositories",
+        "level": 3
+      },
+      {
+        "role": "text",
+        "name": "You could try one of the tips below."
+      },
+      {
+        "role": "DisclosureTriangle",
+        "name": "Search across an organization",
+        "expanded": true
+      },
+      {
+        "role": "text",
+        "name": "Within an organization:"
+      },
+      {
+        "role": "text",
+        "name": "org:"
+      },
+      {
+        "role": "text",
+        "name": "rails"
+      },
+      {
+        "role": "text",
+        "name": "User's code:"
+      },
+      {
+        "role": "text",
+        "name": "user:"
+      },
+      {
+        "role": "text",
+        "name": "mona"
+      },
+      {
+        "role": "text",
+        "name": "Note that we don't currently support regular expressions in the repo or org qualifiers. For more information on search syntax, see our"
+      },
+      {
+        "role": "text",
+        "name": " "
+      },
+      {
+        "role": "link",
+        "name": "syntax guide"
+      },
+      {
+        "role": "text",
+        "name": "."
+      },
+      {
+        "role": "DisclosureTriangle",
+        "name": "Saved searches"
+      },
+      {
+        "role": "text",
+        "name": "You could try an"
+      },
+      {
+        "role": "text",
+        "name": " "
+      },
+      {
+        "role": "link",
+        "name": "advanced search"
+      },
+      {
+        "role": "text",
+        "name": "."
+      }
+    ]
+  },
+  "url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories"
+}

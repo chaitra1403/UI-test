@@ -1,0 +1,769 @@
+{
+  "site_url": "https://github.com/",
+  "site_type": "unknown",
+  "site_category": "general",
+  "test_name": "github_explore_search_non-login_-_complete_user_journey",
+  "login_mechanisms": [
+    "content_browsing",
+    "site_navigation"
+  ],
+  "user_journeys": [
+    {
+      "workflow_type": "navigation_flow",
+      "path": [
+        "search",
+        "explore",
+        "msitarzewski",
+        "homepage",
+        "trending"
+      ],
+      "success_rate": "discovered_site_navigation",
+      "scenario_priority": "medium",
+      "description": "General website navigation and content discovery"
+    }
+  ],
+  "proposed_scenarios": [
+    {
+      "scenario_name": "Discovered Workflow: GitHub Explore & Search (Non-Login) - Complete User Journey",
+      "description": "Comprehensive test covering navigation from homepage to Explore, Trending, repository, file view, error handling for invalid repo, and full search/filter workflow with both valid and invalid inputs.",
+      "workflow_narrative": "A user lands on GitHub, navigates to Explore, then Trending, selects a trending repository, views its README, attempts to access an invalid repository (negative scenario), returns home, uses the search bar to search for a valid user, then an invalid string, and exercises the search filters including both valid and invalid filter options, verifying correct UI responses throughout.",
+      "playwright_implementation_guidance": [
+        "Use page.goto with waitUntil: 'domcontentloaded' for navigation steps.",
+        "Use all selectors provided for robustness; prefer 'roost_primary' where available.",
+        "For web components, use pressSequentially if web_component_parent is present.",
+        "After negative scenarios (invalid repo/search), assert presence of error messages.",
+        "Use waitForSelector for dynamic UI elements (e.g., search suggestions, dropdowns).",
+        "Capture screenshots after error page navigation for documentation."
+      ],
+      "test_type": "e2e_business_workflow",
+      "priority": "critical",
+      "business_goal": "Verify users can discover, search, and filter public repositories, and that error handling is robust for invalid navigation and search/filter inputs.",
+      "user_story": "As a non-logged-in user, I want to explore trending repositories, view repository content, and use search and filters (including negative cases) so that I can discover content and see proper error handling.",
+      "detailed_steps": [
+        {
+          "step_number": 1,
+          "action": "Navigate to homepage",
+          "component": "Navigation",
+          "description": "Load homepage",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Page loaded",
+          "business_impact": "Site accessibility",
+          "selector": "page.goto('https://github.com/', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 2,
+          "action": "Navigate to Explore",
+          "component": "Navigation",
+          "description": "Navigate to Explore page",
+          "expected_page_url": "https://github.com/explore",
+          "verification_point": "Explore page visible",
+          "business_impact": "Entry point to discovery",
+          "selector": "page.goto('https://github.com/explore', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 3,
+          "action": "Click Trending link",
+          "component": "Navigation Menu",
+          "description": "Click on 'Trending' to view trending repositories",
+          "expected_page_url": "https://github.com/trending",
+          "verification_point": "Trending repositories page loaded",
+          "business_impact": "Access to trending content",
+          "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'Trending', exact: true })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: 'Trending' })",
+              "strategy": "role_name",
+              "confidence": 85,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"03487116570e400898e62bd80f54e4762d40c73421fb11fcdc176710e518405c\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-selected-links=\"/trending /trending/developers /trending/developers /trending /trending\"]')",
+              "strategy": "data_attr_selected-links",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^Trending$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": false
+            }
+          ]
+        },
+        {
+          "step_number": 4,
+          "action": "Click trending repository link",
+          "component": "Trending Repository Link",
+          "description": "Click on a trending repository (e.g., msitarzewski/agency-agents)",
+          "expected_page_url": "https://github.com/msitarzewski/agency-agents",
+          "verification_point": "Repository page loaded",
+          "business_impact": "Repository discoverability",
+          "selector": "page.getByRole('link', { name: 'msitarzewski / agency-agents' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'msitarzewski / agency-agents' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /msitarzewski / agency-agents/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a[data-hydro-click-hmac=\"37fb949f4975b15a05501ec314afb6693d56685c5447ceadbecb134d66e60258\"]')",
+              "strategy": "data_attr_hydro-click-hmac",
+              "confidence": 85,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: 'msitarzewski /\n\n      agency-agents' })",
+              "strategy": "tag_filter_text",
+              "confidence": 69,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('xpath=html/body/div[1]/div[5]/main/div[3]/div/div[2]/article[1]/h2/a')",
+              "strategy": "xpath",
+              "confidence": 50,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 5,
+          "action": "Click README.md file",
+          "component": "Repository File Link - README.md",
+          "description": "Click on README.md file in repository",
+          "expected_page_url": "https://github.com/msitarzewski/agency-agents/blob/main/README.md",
+          "verification_point": "README.md file view loaded",
+          "business_impact": "Repository content accessibility",
+          "selector": "page.getByRole('link', { name: 'README.md, (File)' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('link', { name: 'README.md, (File)' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('link', { name: /README\\.md, \\(File\\)/ })",
+              "strategy": "aria_label_regex",
+              "confidence": 96,
+              "is_unique": false
+            },
+            {
+              "selector": "page.getByRole('link', { name: /README\\.md, \\(File\\)/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('#folder-row-21').getByRole('link', { name: 'README.md, (File)' })",
+              "strategy": "parent_id_role",
+              "confidence": 82,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('a').filter({ hasText: /^README\\.md$/ })",
+              "strategy": "link_filter_exact",
+              "confidence": 74,
+              "is_unique": false
+            }
+          ]
+        },
+        {
+          "step_number": 6,
+          "action": "Attempt invalid repository navigation",
+          "component": "Invalid Repository Link",
+          "description": "Attempt to access an invalid repository link (negative scenario)",
+          "expected_page_url": "https://github.com/this-repo-does-not-exist",
+          "verification_point": "Error page or 'Page not found' message displayed",
+          "business_impact": "Error handling for invalid navigation",
+          "selector": "page.goto('https://github.com/this-repo-does-not-exist', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 7,
+          "action": "Return to homepage",
+          "component": "Navigation",
+          "description": "Navigate back to homepage after negative scenario",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Homepage loaded",
+          "business_impact": "User can recover from error",
+          "selector": "page.goto('https://github.com/', { waitUntil: 'domcontentloaded' })",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": []
+        },
+        {
+          "step_number": 8,
+          "action": "Click search bar",
+          "component": "Search Bar",
+          "description": "Activate search bar for input",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Search modal/input visible",
+          "business_impact": "Search discoverability",
+          "selector": "page.getByRole('button', { name: 'Search or jump to…' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('button', { name: 'Search or jump to…' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "aria_label_regex",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[class*=\"Menu\"]').getByRole('button', { name: 'Search or jump to…' })",
+              "strategy": "portal_role_name",
+              "confidence": 92,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"banner\"]').getByRole('button', { name: /Search or jump to…/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            }
+          ],
+          "web_component_parent": {
+            "tagName": "qbsearch-input",
+            "attributes": {
+              "class": "search-input",
+              "data-scope": "",
+              "data-custom-scopes-path": "/search/custom_scopes",
+              "data-delete-custom-scopes-csrf": "5Xq5FxwJF9fx9Vdp0oxb0R4jSEbFVlSvR0GFwq3eYRpL0RT07bkuL1BZhktYMoCWrAQ9R3AtPoMegLAj7Az3Qg",
+              "data-max-custom-scopes": "10",
+              "data-header-redesign-enabled": "false",
+              "data-initial-value": "",
+              "data-blackbird-suggestions-path": "/search/suggestions",
+              "data-jump-to-suggestions-path": "/_graphql/GetSuggestedNavigationDestinations",
+              "data-current-repository": "",
+              "data-current-org": "",
+              "data-current-owner": "",
+              "data-logged-in": "false",
+              "data-copilot-chat-enabled": "false",
+              "data-nl-search-enabled": "false",
+              "data-retain-scroll-position": "true",
+              "data-catalyst": ""
+            },
+            "hasShadowRoot": false
+          }
+        },
+        {
+          "step_number": 9,
+          "action": "Input valid search value",
+          "component": "Search Modal Input",
+          "description": "Input 'torvalds' as a valid search value",
+          "expected_page_url": "https://github.com/",
+          "verification_point": "Search suggestions appear",
+          "business_impact": "Search functionality",
+          "selector": "page.getByRole('combobox', { name: 'Search' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form#query-builder-test-form').getByRole('combobox', { name: 'Search' })",
+              "strategy": "form_id_role",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"dialog\"]').getByRole('combobox', { name: 'Search' })",
+              "strategy": "portal_role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Search', { exact: true })",
+              "strategy": "label_text_exact",
+              "confidence": 92,
+              "is_unique": true
+            }
+          ],
+          "web_component_parent": {
+            "tagName": "query-builder",
+            "attributes": {
+              "data-target": "qbsearch-input.queryBuilder",
+              "id": "query-builder-query-builder-test",
+              "data-filter-key": ":",
+              "data-view-component": "true",
+              "class": "QueryBuilder search-query-builder",
+              "data-min-width": "300",
+              "data-catalyst": ""
+            },
+            "hasShadowRoot": false
+          }
+        },
+        {
+          "step_number": 10,
+          "action": "Click valid search suggestion",
+          "component": "Search Suggestion",
+          "description": "Click on 'torvalds, Search all of GitHub' suggestion",
+          "expected_page_url": "https://github.com/search?q=torvalds&type=repositories",
+          "verification_point": "Search results for 'torvalds' displayed",
+          "business_impact": "Search navigation",
+          "selector": "page.getByRole('option', { name: 'torvalds, Search all of GitHub' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('option', { name: 'torvalds, Search all of GitHub' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('option', { name: /torvalds, Search all of GitHub/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: 'torvalds, Search all of GitHub' })",
+              "strategy": "portal_role_name",
+              "confidence": 94,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: /torvalds, Search all of GitHub/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('li[data-type=\"command-result\"]')",
+              "strategy": "data_attr_type",
+              "confidence": 85,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 11,
+          "action": "Input invalid search value",
+          "component": "Search Modal Input",
+          "description": "Input 'asdkfjhasdkfjh' as an invalid search value",
+          "expected_page_url": "https://github.com/search?q=torvalds&type=repositories",
+          "verification_point": "No results or error message shown",
+          "business_impact": "Negative search handling",
+          "selector": "page.getByRole('combobox', { name: 'Search' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('form#query-builder-test-form').getByRole('combobox', { name: 'Search' })",
+              "strategy": "form_id_role",
+              "confidence": 96,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"dialog\"]').getByRole('combobox', { name: 'Search' })",
+              "strategy": "portal_role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('combobox', { name: 'Search' })",
+              "strategy": "role_name",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByLabel('Search', { exact: true })",
+              "strategy": "label_text_exact",
+              "confidence": 92,
+              "is_unique": true
+            }
+          ],
+          "web_component_parent": {
+            "tagName": "query-builder",
+            "attributes": {
+              "data-target": "qbsearch-input.queryBuilder",
+              "id": "query-builder-query-builder-test",
+              "data-filter-key": ":",
+              "data-view-component": "true",
+              "class": "QueryBuilder search-query-builder",
+              "data-min-width": "300",
+              "data-catalyst": ""
+            },
+            "hasShadowRoot": false
+          }
+        },
+        {
+          "step_number": 12,
+          "action": "Click invalid search suggestion",
+          "component": "Search Suggestions Dropdown",
+          "description": "Click on 'sdkfjhasdkfjh, Search all of GitHub' suggestion (invalid)",
+          "expected_page_url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories",
+          "verification_point": "No results or error message shown",
+          "business_impact": "Negative search handling",
+          "selector": "page.getByRole('option', { name: 'sdkfjhasdkfjh, Search all of' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('option', { name: 'sdkfjhasdkfjh, Search all of' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('option', { name: /sdkfjhasdkfjh, Search all of GitHub/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: 'sdkfjhasdkfjh, Search all of GitHub' })",
+              "strategy": "portal_role_name",
+              "confidence": 94,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"presentation\"]').getByRole('option', { name: /sdkfjhasdkfjh, Search all of GitHub/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('li[data-type=\"command-result\"]')",
+              "strategy": "data_attr_type",
+              "confidence": 85,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 13,
+          "action": "Click Filters heading",
+          "component": "Filters Dropdown",
+          "description": "Click 'Filter by' heading (prepares for filter interaction)",
+          "expected_page_url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories",
+          "verification_point": "Filters UI visible",
+          "business_impact": "Filter discoverability",
+          "selector": "page.getByRole('heading', { name: 'Filter by' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('heading', { name: 'Filter by' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('heading', { name: /Filter by/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"region\"]').getByRole('heading', { name: /Filter by/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Filter by')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Filter')",
+              "strategy": "text_phrase",
+              "confidence": 80,
+              "is_unique": false
+            }
+          ]
+        },
+        {
+          "step_number": 14,
+          "action": "Click Filters dropdown",
+          "component": "Filters Dropdown",
+          "description": "Click on Filters dropdown to open filter options",
+          "expected_page_url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories",
+          "verification_point": "Filter options visible",
+          "business_impact": "Filter discoverability",
+          "selector": "page.getByText('Search across an organizationWithin an organization:org:railsUser\\'s code:user:')",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByText('Search across an organizationWithin an organization:org:railsUser\\'s code:user:')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('xpath=html/body/div[1]/div[5]/main/react-app/div/div/div[1]/div/div/div[2]/div/div/div/div[4]/div/div[2]/div[2]/div/details[1]')",
+              "strategy": "xpath",
+              "confidence": 50,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 15,
+          "action": "Select valid filter option",
+          "component": "Filter Dropdown",
+          "description": "Click on 'org:' filter option",
+          "expected_page_url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories",
+          "verification_point": "Filter applied or UI updated",
+          "business_impact": "Filtering functionality",
+          "selector": "page.getByText('org:')",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByText('org:')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('org:')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('span').filter({ hasText: /^org:$/ })",
+              "strategy": "tag_filter_exact",
+              "confidence": 67,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('xpath=html/body/div[1]/div[5]/main/react-app/div/div/div[1]/div/div/div[2]/div/div/div/div[4]/div/div[2]/div[2]/div/details[1]/div/div[1]/div[2]/span/span')",
+              "strategy": "xpath",
+              "confidence": 50,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 16,
+          "action": "Click Sort/Apply Filters button",
+          "component": "Filter Dropdown Apply Button",
+          "description": "Click on 'Sort by: Best match' button (acts as Apply Filters)",
+          "expected_page_url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories",
+          "verification_point": "Sort menu or filter applied",
+          "business_impact": "Filter application",
+          "selector": "page.getByTestId('sort-button')",
+          "confidence": 100,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByTestId('sort-button')",
+              "strategy": "testid",
+              "confidence": 100,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByTestId('sort-button')",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Sort')",
+              "strategy": "text_phrase",
+              "confidence": 78,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('button[data-loading=\"false\"]')",
+              "strategy": "data_attr_loading",
+              "confidence": 75,
+              "is_unique": false
+            },
+            {
+              "selector": "page.locator('button[data-size=\"small\"]')",
+              "strategy": "data_attr_size",
+              "confidence": 75,
+              "is_unique": false
+            }
+          ]
+        },
+        {
+          "step_number": 17,
+          "action": "Click 'Most stars' sort option",
+          "component": "Sort Dropdown",
+          "description": "Click on 'Most stars' in sort dropdown (valid filter)",
+          "expected_page_url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories&s=stars&o=desc",
+          "verification_point": "Results sorted by most stars",
+          "business_impact": "Sorting functionality",
+          "selector": "page.getByRole('menuitemradio', { name: 'Most stars' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('menuitemradio', { name: 'Most stars' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"menu\"]').getByRole('menuitemradio', { name: 'Most stars' })",
+              "strategy": "portal_role_name",
+              "confidence": 97,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('menuitemradio', { name: /Most stars/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"menu\"]').getByRole('menuitemradio', { name: /Most stars/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Most stars')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": true
+            }
+          ]
+        },
+        {
+          "step_number": 18,
+          "action": "Click invalid filter option",
+          "component": "Sort Dropdown - Invalid Filter",
+          "description": "Click on 'Fewest stars' in sort dropdown (invalid/negative filter scenario)",
+          "expected_page_url": "https://github.com/search?q=sdkfjhasdkfjh&type=repositories&s=stars&o=asc",
+          "verification_point": "Results sorted by fewest stars or error handled gracefully",
+          "business_impact": "Negative filter handling",
+          "selector": "page.getByRole('menuitemradio', { name: 'Fewest stars' })",
+          "confidence": 99,
+          "based_on_interaction": true,
+          "all_selectors": [
+            {
+              "selector": "page.getByRole('menuitemradio', { name: 'Fewest stars' })",
+              "strategy": "roost_primary",
+              "confidence": 99,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"menu\"]').getByRole('menuitemradio', { name: 'Fewest stars' })",
+              "strategy": "portal_role_name",
+              "confidence": 97,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByRole('menuitemradio', { name: /Fewest stars/ })",
+              "strategy": "role_name_regex",
+              "confidence": 95,
+              "is_unique": true
+            },
+            {
+              "selector": "page.locator('[role=\"menu\"]').getByRole('menuitemradio', { name: /Fewest stars/ })",
+              "strategy": "parent_role_child_role_regex",
+              "confidence": 88,
+              "is_unique": true
+            },
+            {
+              "selector": "page.getByText('Fewest stars')",
+              "strategy": "text",
+              "confidence": 88,
+              "is_unique": true
+            }
+          ]
+        }
+      ],
+      "expected_results": [
+        "User completes workflow from Explore to Trending to repository and file view",
+        "Negative navigation to invalid repo shows error page",
+        "Search with valid and invalid values works as expected",
+        "Filters and sort options apply or handle errors gracefully",
+        "No unexpected errors or UI anomalies"
+      ],
+      "edge_cases_to_test": [
+        "Slow network conditions (simulate throttling)",
+        "Interruptions during navigation (e.g., page reload mid-flow)",
+        "Rapid input in search bar",
+        "Clicking multiple filter options quickly"
+      ],
+      "data_requirements": [
+        "No login required",
+        "Public repositories and trending content available",
+        "Valid search term: 'torvalds'",
+        "Invalid search term: 'asdkfjhasdkfjh'"
+      ],
+      "prerequisites": [
+        "GitHub site accessible",
+        "Trending repositories and search features enabled"
+      ],
+      "auth_required": false,
+      "starting_url": null
+    }
+  ],
+  "login_completion_state": "successful",
+  "analysis_timestamp": "2026-03-12T06:03:08.633704",
+  "confidence_score": 0.5,
+  "auth_required": false,
+  "starting_url": null
+}
