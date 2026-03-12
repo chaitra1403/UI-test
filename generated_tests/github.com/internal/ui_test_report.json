@@ -1,0 +1,129 @@
+{
+  "login_scenario": "Skipped",
+  "workflow_completed": true,
+  "workflow_result": "PASS",
+  "workflow_error": "",
+  "login_agent_activity_summary": "Not available",
+  "user_scenario_agent_activity_summary": [
+    "The agent systematically executed the GitHub UI Testing Scenarios (Non-Login), beginning with navigation to the Explore page and proceeding through repository exploration, search functionality (including both valid and invalid queries), filter application, and error handling. The agent performed both positive and negative test cases, such as accessing valid repositories and triggering error states with invalid links. Despite encountering an element lookup error early in the flow, the agent recovered by identifying alternative selectors and continued with the scenario. All major scenario steps\u2014including navigation, search, filter application, and negative path validation\u2014were executed, and the agent reached the intended final state, confirming the scenario's objectives were met."
+  ],
+  "generated_files": {
+    "feature_files": [],
+    "json_files": []
+  },
+  "scenarios": {},
+  "token_usage": {
+    "total": {
+      "input": 2882674,
+      "output": 82902,
+      "total": 2965576,
+      "cost": 3.119060000000002,
+      "cached_input": 2206336
+    },
+    "sessions": {
+      "main_execution": {
+        "type": "root",
+        "input": 0,
+        "output": 0,
+        "total": 0,
+        "cost": 0.0,
+        "cached_input": 0,
+        "call_count": 0,
+        "start_time": 1773293999.601276,
+        "end_time": 1773299320.511727,
+        "duration": 5320.910451173782
+      },
+      "extraction_agent": {
+        "type": "auto_created",
+        "input": 660937,
+        "output": 10172,
+        "total": 671109,
+        "cost": 0.8823540000000003,
+        "cached_input": 347264,
+        "call_count": 27,
+        "start_time": 1773294030.216646,
+        "end_time": null,
+        "duration": null
+      },
+      "scenario_llm": {
+        "type": "auto_created",
+        "input": 12562,
+        "output": 7261,
+        "total": 19823,
+        "cost": 0.08321200000000001,
+        "cached_input": 0,
+        "call_count": 1,
+        "start_time": 1773295388.6003702,
+        "end_time": null,
+        "duration": null
+      },
+      "pom_gen_standalone_analyzer": {
+        "type": "test_generation",
+        "input": 138127,
+        "output": 4890,
+        "total": 143017,
+        "cost": 0.127406,
+        "cached_input": 125312,
+        "call_count": 10,
+        "start_time": 1773295388.6470308,
+        "end_time": null,
+        "duration": null
+      },
+      "llm_call": {
+        "type": "auto_created",
+        "input": 7932,
+        "output": 605,
+        "total": 8537,
+        "cost": 0.020704,
+        "cached_input": 0,
+        "call_count": 1,
+        "start_time": 1773295587.5828464,
+        "end_time": null,
+        "duration": null
+      },
+      "test_gen_pom_github_explore_search_non_login___complete_user_journey": {
+        "type": "test_generation",
+        "input": 131158,
+        "output": 2452,
+        "total": 133610,
+        "cost": 0.107788,
+        "cached_input": 116096,
+        "call_count": 10,
+        "start_time": 1773295587.6900647,
+        "end_time": null,
+        "duration": null
+      },
+      "code_repair_github_explore_search_non_login___complete_user_journey_pom.noauth.spec.js": {
+        "type": "code_repair",
+        "input": 1903153,
+        "output": 55054,
+        "total": 1958207,
+        "cost": 1.820241999999999,
+        "cached_input": 1617664,
+        "call_count": 88,
+        "start_time": 1773295789.6321328,
+        "end_time": 1773299320.46868,
+        "duration": 3530.8365471363068
+      },
+      "a11y_tree_filter": {
+        "type": "auto_created",
+        "input": 28805,
+        "output": 2468,
+        "total": 31273,
+        "cost": 0.07735399999999999,
+        "cached_input": 0,
+        "call_count": 6,
+        "start_time": 1773295908.1066654,
+        "end_time": null,
+        "duration": null
+      }
+    },
+    "provider": "azure_open_ai",
+    "model": "gpt-4.1",
+    "timestamp": "2026-03-12T07:08:40.512189",
+    "cache_statistics": {
+      "total_cached_tokens": 2206336,
+      "cache_hit_rate_percent": 76.5
+    }
+  }
+}
